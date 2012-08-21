@@ -12,11 +12,10 @@ public abstract class Game implements Runnable {
 	protected final InputListener input;
 	protected Graphics2D gfx;
 	private BufferedImage backBuffer;
-	protected SpriteManager spriteManager; 
+
 	public Game(Canvas canvas){
 		this.canvas = canvas;
 		input = new InputListener();
-		spriteManager = new SpriteManager();
 	}
 	protected int getMaxFPS() {
 		return 80;
@@ -32,10 +31,8 @@ public abstract class Game implements Runnable {
 	protected void render() {
 		canvas.getGraphics().drawImage(backBuffer,0,0,null);
 		gfx.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		spriteManager.render(gfx);
 	}
 	protected void update(){
-		spriteManager.update(this);
 	}
 	public void start() {
 		Thread gameThread = new Thread(this);
@@ -56,13 +53,14 @@ public abstract class Game implements Runnable {
 			long elapsed = (now - time);
 			long sleepTime = 1000 / getMaxFPS() - elapsed;
 			try {
-				if (sleepTime > 0)
+				if (sleepTime > 0){
 					Thread.sleep(sleepTime);
+					System.out.println("FPS: "+getMaxFPS());
+				}else
+				    System.out.println("FPS: "+1000/elapsed);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("FPS: "+1000/elapsed);
-			
 		}
 	}
 	public String getName() {
@@ -74,7 +72,5 @@ public abstract class Game implements Runnable {
 	public InputListener getInput(){
 		return input;
 	}
-	public SpriteManager getSpriteManager(){
-		return spriteManager;
-	}
+
 }
