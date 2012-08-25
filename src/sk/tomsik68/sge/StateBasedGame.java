@@ -33,4 +33,7 @@ public abstract class StateBasedGame extends Game {
         currentState = state;
         states[currentState].init(this);
     }
+    public GameState getCurrentState(){
+        return states[currentState];
+    }
 }
