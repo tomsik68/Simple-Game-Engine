@@ -77,4 +77,8 @@ public class SpriteManager {
 
 	}
 
+    public Set<Sprite> getAllSprites() {
+        return sprites;
+    }
+
 }
