@@ -1,6 +1,5 @@
 package sk.tomsik68.sge;
 
-import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -8,29 +7,28 @@ import java.awt.image.BufferedImage;
 
 
 public abstract class Game implements Runnable {
-	private Canvas canvas;
+	private ListenerAttachable canvas;
 	protected final InputListener input;
 	protected Graphics2D gfx;
 	private BufferedImage backBuffer;
+    private GraphicsAdapter graphics;
 
-	public Game(Canvas canvas){
+	public Game(ListenerAttachable canvas, GraphicsAdapter graphics){
 		this.canvas = canvas;
+		this.graphics = graphics;
 		input = new InputListener();
 	}
 	protected int getMaxFPS() {
 		return 80;
 	}
 	protected void init(){
-		backBuffer = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+		backBuffer = new BufferedImage(graphics.getWidth(), graphics.getHeight(), BufferedImage.TYPE_INT_RGB);
 		gfx = backBuffer.createGraphics();
-		canvas.addKeyListener(input);
-		canvas.addMouseListener(input);
-		canvas.addFocusListener(input);
-		canvas.addMouseMotionListener(input);
+		canvas.addListener(input);
 	}
 	protected void render() {
-		canvas.getGraphics().drawImage(backBuffer,0,0,null);
-		gfx.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+	    graphics.getGraphics().drawImage(backBuffer,0,0,null);
+		gfx.clearRect(0, 0, graphics.getWidth(), graphics.getHeight());
 	}
 	protected void update(){
 	}

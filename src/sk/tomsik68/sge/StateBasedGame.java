@@ -1,16 +1,14 @@
 package sk.tomsik68.sge;
 
-import java.awt.Canvas;
-
 public abstract class StateBasedGame extends Game {
     private GameState[] states;
     private int currentState = 0;
-    public StateBasedGame(Canvas canvas, int stateCount) {
-        super(canvas);
+    public StateBasedGame(ListenerAttachable l,GraphicsAdapter ga, int stateCount) {
+        super(l,ga);
         states = new GameState[stateCount];
     }
     @Override
-    protected void init() {
+    public void init() {
         super.init();
         initStates();
     }
