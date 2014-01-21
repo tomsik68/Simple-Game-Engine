@@ -18,7 +18,6 @@ public class InputListener implements KeyListener,MouseListener,FocusListener,Mo
 	private boolean[] mousePressed = mouse;
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
 	}
 
 	@Override

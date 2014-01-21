@@ -49,7 +49,7 @@ public class GameLoader {
             e.printStackTrace();
         }
         frame.setVisible(true);
-        frame.createBufferStrategy(2);
+        canvas.createBufferStrategy(2);
         frame.setTitle(game.getName());
         if(game.getIcon() != null)
             frame.setIconImage(game.getIcon());
